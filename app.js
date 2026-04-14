@@ -8,21 +8,22 @@ addButton.addEventListener('click', function() {
         const newListItem = document.createElement('li');
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
-        checkbox.style.marginRight = '10px';
+        checkbox.addEventListener('change', function() {
+            newListItem.classList.toggle('completed', checkbox.checked);
+        });
         const taskSpan = document.createElement('span');
         taskSpan.textContent = taskText;
-        checkbox.addEventListener('change', function() {
-            if (checkbox.checked) {
-                newListItem.classList.add('completed');
-            } else {
-                newListItem.classList.remove('completed');
-            }
+        taskSpan.style.marginLeft = "10px";
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = 'Usuń';
+        deleteBtn.className = 'delete-btn';
+        deleteBtn.addEventListener('click', function() {
+            newListItem.remove();
         });
         newListItem.appendChild(checkbox);
         newListItem.appendChild(taskSpan);
+        newListItem.appendChild(deleteBtn); 
         taskList.appendChild(newListItem);
         taskInput.value = "";
-    } else {
-        alert("Wpisz treść zadania!");
     }
 });
