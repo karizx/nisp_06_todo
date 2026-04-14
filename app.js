@@ -6,7 +6,20 @@ addButton.addEventListener('click', function() {
     const taskText = taskInput.value;
     if (taskText.trim() !== "") {
         const newListItem = document.createElement('li');
-        ewListItem.textContent = taskText;
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.style.marginRight = '10px';
+        const taskSpan = document.createElement('span');
+        taskSpan.textContent = taskText;
+        checkbox.addEventListener('change', function() {
+            if (checkbox.checked) {
+                newListItem.classList.add('completed');
+            } else {
+                newListItem.classList.remove('completed');
+            }
+        });
+        newListItem.appendChild(checkbox);
+        newListItem.appendChild(taskSpan);
         taskList.appendChild(newListItem);
         taskInput.value = "";
     } else {
